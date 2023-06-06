@@ -1,0 +1,12 @@
+CREATE DATABASE outros VERSION '1' OPTIONS (ANNOTATION 'Customer VDB');
+USE DATABASE outros;
+CREATE SERVER dbtarefas FOREIGN DATA WRAPPER H2;
+--OPTIONS (importer.tableTypes 'TABLE,VIEW' );
+--CREATE VIRTUAL SCHEMA virt;
+--CREATE SCHEMA local1  SERVER dbtarefas;
+--IMPORT FOREIGN SCHEMA tarefa FROM SERVER dbtarefas INTO local1;
+
+
+
+
+
