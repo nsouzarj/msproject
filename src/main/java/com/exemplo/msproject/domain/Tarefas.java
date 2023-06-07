@@ -1,7 +1,7 @@
 package com.exemplo.msproject.domain;
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Tarefas")
 @Table(name = "tarefa")
 public class Tarefas
  {
