@@ -1,25 +1,18 @@
 package com.exemplo.msproject.util;
 
 import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 
 @Configuration
@@ -27,24 +20,16 @@ public class DataSourceConfig{
 
 
 
-    @Bean(name = "coisado")
-    @ConfigurationProperties (prefix = "spring.datasource")
-    public DataSource datasource() throws SQLException {
-        DataSourceProperties dataSourceProperties = new DataSourceProperties();
-        dataSourceProperties.setPassword("ca");
-        dataSourceProperties.setUsername("ca");
-        dataSourceProperties.setDriverClassName("org.h2.Driver");
-        dataSourceProperties.setUrl("jdbc:h2:mem:tarefas;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS local");
-
-        DataSourceBuilder dataSourceBuilder = dataSourceProperties.initializeDataSourceBuilder();
-
-        return DataSourceBuilder.create().build();
+    @Bean("doido")
+    @ConfigurationProperties (prefix = "spring.datasource.local")
+    public DataSource local() throws SQLException {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
 
     @Bean("entityManagerFactory")
     @Primary
-    @ConfigurationProperties (prefix = "spring.datasource")
+    @ConfigurationProperties (prefix = "spring.datasource.local")
     public LocalSessionFactoryBean sessionFactory() throws NamingException, SQLException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 

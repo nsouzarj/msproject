@@ -8,18 +8,23 @@ import net.sf.mpxj.ResourceAssignment;
 import net.sf.mpxj.ResourceAssignmentContainer;
 import net.sf.mpxj.reader.UniversalProjectReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@ComponentScan ("com.exemplo.msproject.services.ServiceTarefa")
 public class LerMsProject {
 
-    @Autowired
-    private ServiceTarefas serviceTarefas;
+//    @Autowired(required = false)
+//    @Qualifier("ServiceTarefas")
+//    private ServiceTarefas serviceTarefas;
+
     UniversalProjectReader reader = new UniversalProjectReader();
     ProjectFile project = reader.read("Jurua_09fev23.mpp");
     ResourceAssignmentContainer resourceAssignments=project.getResourceAssignments();
@@ -29,7 +34,7 @@ public class LerMsProject {
 
     public LerMsProject () throws MPXJException {
     }
-    @Bean
+    @Bean(name = "leraquivo")
     public void leraquivo(){
 
         for(ResourceAssignment resso:resourceAssignments){
@@ -38,12 +43,12 @@ public class LerMsProject {
                 tarefas.setIdtarefaprincipal(resso.getTask().getUniqueID());
                 tarefas.setNometarefa(resso.getTask().getName());
                 tarefas.setRecurso(resso.getResource().getName());
-                serviceTarefas.salvarTarefa(tarefas);
+              //  serviceTarefas.salvarTarefa(tarefas);
             }
         }
 
     }
-
+    @Bean(name="listaTarefa")
     public  List<Tarefas> listaTarefa(){
         for(ResourceAssignment resso:resourceAssignments){
             if(resso.getResource()!=null){
