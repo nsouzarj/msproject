@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Controller
 public class LerMsProject {
 
-//    @Autowired(required = false)
-//    @Qualifier("ServiceTarefas")
-//    private ServiceTarefas serviceTarefas;
+    @Autowired
+     private ServiceTarefas serviceTarefas;
 
     UniversalProjectReader reader = new UniversalProjectReader();
     ProjectFile project = reader.read("Jurua_09fev23.mpp");
@@ -33,17 +33,18 @@ public class LerMsProject {
     List<Tarefas> tarefasList = new ArrayList<>();
 
     public LerMsProject () throws MPXJException {
+        // TODO document why this constructor is empty
     }
-    @Bean(name = "leraquivo")
+
     public void leraquivo(){
 
-        for(ResourceAssignment resso:resourceAssignments){
-            if(resso.getResource()!=null){
+        for(ResourceAssignment dados:resourceAssignments){
+            if(dados.getResource()!=null){
                 tarefas= new Tarefas();
-                tarefas.setIdtarefaprincipal(resso.getTask().getUniqueID());
-                tarefas.setNometarefa(resso.getTask().getName());
-                tarefas.setRecurso(resso.getResource().getName());
-              //  serviceTarefas.salvarTarefa(tarefas);
+                tarefas.setIdtarefaprincipal(dados.getTask().getUniqueID());
+                tarefas.setNometarefa(dados.getTask().getName());
+                tarefas.setRecurso(dados.getResource().getName());
+                serviceTarefas.salvarTarefa(tarefas);
             }
         }
 
@@ -60,6 +61,7 @@ public class LerMsProject {
                 tarefasList.add(tarefas);
             }
         }
+        //serviceTarefas.trazerLista();
        return tarefasList;
     }
 

@@ -1,12 +1,14 @@
 package com.exemplo.msproject.domain;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
-@Entity(name = "Tarefas")
-@Table(name = "tarefa")
+@Entity
 public class Tarefas
  {
      @Id
-     @GeneratedValue(generator = "teste",strategy = GenerationType.AUTO)
+     @GeneratedValue( strategy = GenerationType.AUTO)
+     @Column(name = "id")
      private long id;
      private long idtarefaprincipal;
      private String nometarefa;

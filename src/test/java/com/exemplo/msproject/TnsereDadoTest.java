@@ -3,7 +3,6 @@ package com.exemplo.msproject;
 import com.exemplo.msproject.domain.Tarefas;
 import com.exemplo.msproject.util.LerMsProject;
 import net.sf.mpxj.MPXJException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

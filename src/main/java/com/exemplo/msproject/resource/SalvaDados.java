@@ -7,20 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-
+//@RestController
 //@CrossOrigin(value = "*")
 public class SalvaDados {
 
     @Autowired
     LerMsProject lerMsProject;
 
-//  @RequestMapping(value = "/ler",method = RequestMethod.GET)
+  // @RequestMapping(value = "/ler",method = RequestMethod.GET)
    public void lerDados(){
         lerMsProject.leraquivo();
   }
 
 
-   // @RequestMapping(value = "/lista",method = RequestMethod.GET)
+    //@RequestMapping(value = "/lista",method = RequestMethod.GET)
     public List<Tarefas> lerDados1(){
         return lerMsProject.listaTarefa();
     }
