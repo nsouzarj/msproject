@@ -15,11 +15,10 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
 public class DataSourceConfig{
 
-    //@Bean foi tirado
+    @Bean //foi tirado
     @ConfigurationProperties (prefix = "spring.datasource.local")
     public DataSource local() throws SQLException {
       DataSourceProperties teste = new DataSourceProperties();
@@ -39,13 +38,13 @@ public class DataSourceConfig{
 //    }
 
 
-    @Bean(name = "entityManagerFactory")
-    @Primary
-    @ConfigurationProperties (prefix = "spring.datasource.local")
-    public LocalSessionFactoryBean sessionFactory() throws NamingException, SQLException {
-
-        return new LocalSessionFactoryBean();
-    }
+//    @Bean(name = "entityManagerFactory")
+//    @Primary
+//    @ConfigurationProperties (prefix = "spring.datasource.local")
+//    public LocalSessionFactoryBean sessionFactory() throws NamingException, SQLException {
+//
+//        return new LocalSessionFactoryBean();
+//    }
 
 //    @Bean
 //    public DataSourceInitializer dataSourceInitializer(DataSource ds) {
