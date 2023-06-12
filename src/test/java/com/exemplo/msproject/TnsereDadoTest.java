@@ -6,7 +6,6 @@ import net.sf.mpxj.MPXJException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.List;
 class TnsereDadoTest {
 
@@ -25,7 +24,7 @@ class TnsereDadoTest {
         } catch (MPXJException e) {
             throw new RuntimeException(e);
         }
-        List<Tarefas> tarefasList= lerMsProject.listaTarefa();
+        List<Tarefas> tarefasList = lerMsProject.listaTarefaRecursos();
         System.out.println(tarefasList);
 
     }
